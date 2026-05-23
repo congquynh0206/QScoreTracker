@@ -10,4 +10,5 @@ struct Player : Identifiable, Codable{
     var id = UUID()
     var name : String
     var score : Int = 0
+    var color : String
 }

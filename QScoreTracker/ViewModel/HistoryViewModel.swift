@@ -22,9 +22,9 @@ class HistoryViewModel: ObservableObject {
         
     }
     
-    func saveDataToHistory() {
-        let newGameSession = GameSession(name: "Game \(history.count)", date: Date(), players: self.players)
-        history.append(newGameSession)
+    func saveDataToHistory(players: [Player]) {
+        let newGameSession = GameSession(name: "Game \(history.count + 1)", date: Date(), players: players)
+        history.insert(newGameSession, at: 0)
     }
     
     private func saveData() {

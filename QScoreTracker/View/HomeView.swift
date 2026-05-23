@@ -58,7 +58,7 @@ struct HomeView: View {
                 }
                 
                 Button{
-                    
+                    hisVm.saveDataToHistory(players: vm.players)
                 }label: {
                     Image(systemName: "checkmark")
                         .padding()

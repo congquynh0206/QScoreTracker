@@ -30,7 +30,7 @@ struct OneGameSession : View {
     var body: some View {
         VStack (spacing: 0){
             HStack{
-                Text("\(game.name)").font(.headline)
+                Text("\(game.name)").font(.title)
                 Spacer()
                 Text(game.date, style: .date)
                     .foregroundColor(.gray)
@@ -80,15 +80,15 @@ struct OneGameSession : View {
 #Preview {
     // 1. Tạo dữ liệu giả (Mock Data)
     let mockPlayersGame1 = [
-        Player(name: "Flamingo", score: 12),
-        Player(name: "Heron", score: -5),
-        Player(name: "Owl Finch", score: 15)
+        Player(name: "Flamingo", score: 12, color: ColorBoard.blue),
+        Player(name: "Heron", score: -5, color: ColorBoard.red),
+        Player(name: "Owl Finch", score: 15, color: ColorBoard.brown)
     ]
     
     let mockPlayersGame2 = [
-        Player(name: "Flamingo", score: -2),
-        Player(name: "Heron", score: 20),
-        Player(name: "Owl Finch", score: 8)
+        Player(name: "Flamingo", score: -2, color: ColorBoard.blue),
+        Player(name: "Heron", score: 20, color: ColorBoard.pink),
+        Player(name: "Owl Finch", score: 8, color: ColorBoard.purple)
     ]
     
     let mockHistory = [

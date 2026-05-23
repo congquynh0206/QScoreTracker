@@ -48,9 +48,9 @@ class HomeViewModel: ObservableObject {
         }
         
         self.players =
-        [Player(name: "Player 1", score: 0),
-        Player(name: "Player 2", score: 0),
-        Player(name: "Player 3", score: 0)]
+        [Player(name: "Player 1", score: 0, color: ColorBoard.blue),
+        Player(name: "Player 2", score: 0, color: ColorBoard.red),
+        Player(name: "Player 3", score: 0, color: ColorBoard.green)]
     }
     
 }
