@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @StateObject var vm =  HomeViewModel()
     @StateObject var hisVm = HistoryViewModel()
+    @State private var showAddSheet : Bool = false
     var body: some View {
         NavigationStack{
             VStack {
@@ -25,7 +26,22 @@ struct HomeView: View {
                     Spacer()
                     Text("ScoreBoard").font(.headline)
                     Spacer()
-                    Image(systemName: "plus")
+                    
+                    Button{
+                        showAddSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .buttonStyle(.plain)
+                    .sheet(isPresented: $showAddSheet){
+                        AddPlayerSheetView(vm: vm)
+                            .presentationDetents([
+                                .fraction(0.75)
+                              ])
+                            .presentationDragIndicator(.visible)
+                    }
+                    
+                    
                 }
             }
             .padding()
@@ -33,7 +49,7 @@ struct HomeView: View {
             ScrollView{
                 VStack(spacing: 10){
                     ForEach(vm.players){ player in
-                        PlayerCardView(player: player, onChangeScore: { score in
+                        PlayerCardView(vm: vm, player: player, onChangeScore: { score in
                             vm.changeScore(playerId: player.id, score: score)
                             
                         })

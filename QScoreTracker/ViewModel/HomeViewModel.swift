@@ -32,6 +32,24 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    func addPlayer(name: String, score: Int, color: String){
+        players.append(Player(name: name, score: score, color: color))
+    }
+    
+    func removePlayer (id : UUID){
+        if let index = players.firstIndex(where: {$0.id == id}){
+            players.remove(at: index)
+        }
+    }
+    
+    func updatePlayer(id: UUID, name: String, score: Int, color: String) {
+        if let index = players.firstIndex(where: { $0.id == id }) {
+            players[index].name = name
+            players[index].score = score
+             players[index].color = color 
+        }
+    }
+    
     private func saveData(){
         let encoder = JSONEncoder()
         if let encode = try? encoder.encode(players) {

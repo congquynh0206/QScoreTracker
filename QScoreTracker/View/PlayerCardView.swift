@@ -7,8 +7,10 @@
 import SwiftUI
 
 struct PlayerCardView: View {
+    @ObservedObject var vm : HomeViewModel
     let player: Player
     var onChangeScore :  (Int) -> Void
+    @State private var playerToEdit : Player? = nil
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -17,8 +19,32 @@ struct PlayerCardView: View {
                     .foregroundColor(Color(hex: player.color))
                     .fontWeight(.bold)
                 Spacer()
-                Image(systemName: "xmark")
-                    .foregroundColor(Color(hex: player.color))
+                HStack(spacing: 10){
+                    
+                    Button {
+                        playerToEdit = player
+                    }label: {
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(Color(hex: player.color))
+                            .frame(width: 35, height: 35)
+                    }
+                    .sheet(item: $playerToEdit){ player in
+                        AddPlayerSheetView(playerToEdit: player, vm: vm)
+                            .presentationDetents([.fraction(0.75)])
+                            .presentationDragIndicator(.visible)
+                    }
+                    
+                    Button {
+                        vm.removePlayer(id: player.id)
+                    }label: {
+                        Image(systemName: "xmark")
+                            .foregroundColor(Color(hex: player.color))
+                            .frame(width: 35, height: 35)
+                    }
+                    
+                }
+                
+                
             }.padding()
             HStack {
                 Button (action: {onChangeScore(-1)}){
